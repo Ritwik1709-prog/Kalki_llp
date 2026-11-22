@@ -1,6 +1,6 @@
-# Attest LLP
+# Kalki
 
-Attest LLP is an autonomous vendor due-diligence and compliance firm that cross-examines vendor security claims against live web evidence, pauses at a Managing Partner judgment gate, and delivers signed compliance dossiers.
+Kalki is an autonomous vendor due-diligence and compliance firm that cross-examines vendor security claims against live web evidence, pauses at a Managing Partner judgment gate, and delivers signed compliance dossiers.
 
 Track A2: **The full-stack AI firm**.
 
@@ -49,7 +49,7 @@ The script loads the repository's `.env` without overwriting existing process va
 
 `--live` explicitly enables the two connectivity checks even when `.env` says `OLOSTEP_MODE=replay`. After configuration validation, it attempts exactly one [Olostep Maps request](https://docs.olostep.com/api-reference/maps/create) (`https://example.com`, `top_n: 5`, budgeted at one credit) and one small [Gemini generateContent request](https://ai.google.dev/gemini-api/docs/get-started), with no retries, redirects, pagination, or model fallback. An exhausted budget prevents the Olostep request. Each check prints PASS/FAIL; exit status is nonzero if either fails. Provider errors are reported only as HTTP status codes, never response bodies or credentials.
 
-Without `--live` (or explicit `OLOSTEP_MODE=live`), no network calls are made: Olostep checks the replay cache and the LLM check reports FAIL because live mode is required. Replay is not a connectivity PASS. The smoke cache and persistent credit ledger live outside the repository at `~/.attest_llp/smoke.sqlite3`; `ATTEST_SMOKE_DB` can override this path. A live run deliberately refreshes the cached map; replay accepts it for 604800 seconds. Failed/uncertain live attempts retain their one-credit reservation. Maps has no `max_age` request field, so its cache age is enforced locally.
+Without `--live` (or explicit `OLOSTEP_MODE=live`), no network calls are made: Olostep checks the replay cache and the LLM check reports FAIL because live mode is required. Replay is not a connectivity PASS. The smoke cache and persistent credit ledger live outside the repository at `~/.kalki_llp/smoke.sqlite3`; `KALKI_SMOKE_DB` can override this path. A live run deliberately refreshes the cached map; replay accepts it for 604800 seconds. Failed/uncertain live attempts retain their one-credit reservation. Maps has no `max_age` request field, so its cache age is enforced locally.
 
 No paid connectivity checks are part of repository initialization. Run the live command when ready to spend one Olostep credit plus the minimal LLM usage.
 
@@ -60,3 +60,17 @@ python scripts/smoke_test.py --live --llm-only
 ```
 
 This makes one LLM request, never opens the Olostep cache, and requires only `LLM_API_KEY`. The default Gemini 3.8 Flash request uses the supported `low` thinking level and a 256-token output cap (including thinking tokens). See [Gemini thinking levels](https://aistudio.google.com/docs/thinking). `--llm-only` still requires live mode; it does not enable network access by itself.
+
+## Deploy Vercel + Render + Neon/Aiven
+
+1. Create a Neon or Aiven PostgreSQL database and copy its connection URL. Startup applies versioned migrations automatically; no table-creation shell commands are needed.
+2. Create a Render Blueprint from render.yaml. Supply DATABASE_URL, backend API keys, LLM_MODEL=gemini-3.6-flash, and ALLOWED_ORIGINS (your exact Vercel URL). Keep OLOSTEP_MODE=replay until live work is explicitly authorized.
+3. Import the repository in Vercel with root directory frontend, Vite preset, build command npm run build, and output dist. Set public VITE_API_URL to the Render HTTPS URL. Redeploy after changing this build-time value.
+4. Update Render ALLOWED_ORIGINS if Vercel assigns a different hostname. Optional ALLOWED_ORIGIN_REGEX=^https://.*\.vercel\.app$ admits all Vercel tenants; explicit origins are preferable.
+5. Check /health. Optional cron-job.org GET pings can monitor it; free-service availability and cold-start timing are not guaranteed. SSE heartbeats reduce idle disconnects but cannot prevent platform restarts.
+
+Local backend: install backend/requirements.txt, then run python -m uvicorn app.main:app --app-dir backend --reload. Configuration reads process environment; use --env-file .env explicitly if desired. With DATABASE_URL unset, SQLite works automatically. Local frontend: cd frontend, npm ci, npm run dev. Verification from repository root: python -m pytest and python scripts/verify_deploy_ready.py.
+
+This deployment foundation supplies schema, health/CORS, shared in-memory PDF and SSE helpers, and a connection-status UI. Audit endpoints, authenticated Partner approval, and signed dossier delivery remain to be implemented. PDF export is not exposed through an unguarded route. The smoke script remains local-only. Provider accounts and credentials are required; nothing has been published automatically.
+
+Formal firm name: **Kalki LLP**. Repository: `kalki-llp`.

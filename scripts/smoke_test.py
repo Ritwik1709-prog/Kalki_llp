@@ -177,8 +177,8 @@ def main():
         return 0 if report("LLM", lambda: check_llm(llm_key, model)) else 1
 
     def map_check():
-        configured_path = os.getenv("ATTEST_SMOKE_DB")
-        path = Path(configured_path) if configured_path else Path.home() / ".attest_llp" / "smoke.sqlite3"
+        configured_path = os.getenv("KALKI_SMOKE_DB")
+        path = Path(configured_path) if configured_path else Path.home() / ".kalki_llp" / "smoke.sqlite3"
         path.parent.mkdir(parents=True, exist_ok=True)
         db = sqlite3.connect(path, timeout=10)
         try:

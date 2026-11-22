@@ -1,0 +1,15 @@
+- main [ref=f3e3]:
+  - link "Back to Kalki LLP" [ref=f3e4] [cursor=pointer]:
+    - /url: /
+  - navigation "Firm identity" [ref=f3e5]:
+    - generic [ref=f3e6]: KALKI
+    - generic [ref=f3e7]: LLP
+  - paragraph [ref=f3e8]: EVIDENCE BEFORE APPROVAL
+  - heading "Partner Judgment Desk" [level=1] [ref=f3e9]
+  - paragraph [ref=f3e10]: Vendor due diligence, with a Managing Partner at the judgment gate.
+  - status [ref=f3e11]: Backend unavailable. Please retry shortly.
+  - button "Check connection" [ref=f3e12] [cursor=pointer]
+  - complementary [ref=f3e13]:
+    - strong [ref=f3e14]: HIGH / CRITICAL RISK
+    - paragraph [ref=f3e15]: Contradictions require human Managing Partner review before dossier release.
+  - paragraph [ref=f3e16]: Deployment foundation ready. Audit intake and Partner review are not yet available.

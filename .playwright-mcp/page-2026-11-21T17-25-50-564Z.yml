@@ -1,0 +1,213 @@
+- generic [ref=f4e2]:
+  - banner [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - link "KALKI LLP" [ref=f4e5] [cursor=pointer]:
+        - /url: /
+      - navigation "Primary" [ref=f4e6]:
+        - link "Practice" [ref=f4e7] [cursor=pointer]:
+          - /url: /#practice
+        - link "How It Works" [ref=f4e8] [cursor=pointer]:
+          - /url: /#how-it-works
+        - link "Live Cases" [ref=f4e9] [cursor=pointer]:
+          - /url: /#cases
+        - link "Safeguards" [ref=f4e10] [cursor=pointer]:
+          - /url: /#safeguards
+        - link "Benchmarks" [ref=f4e11] [cursor=pointer]:
+          - /url: /#benchmarks
+      - generic [ref=f4e12]:
+        - link "Partner Desk" [ref=f4e13] [cursor=pointer]:
+          - /url: /desk
+        - link "Commission Audit" [ref=f4e14] [cursor=pointer]:
+          - /url: /desk
+  - main [ref=f4e15]:
+    - generic [ref=f4e16]:
+      - generic [ref=f4e17]:
+        - generic [ref=f4e18]: AUTONOMOUS COMPLIANCE & DUE-DILIGENCE PRACTICE
+        - heading [level=1] [ref=f4e19]:
+          - text: Autonomousdue diligence.
+          - emphasis [ref=f4e20]: Partner-gradejudgment.
+        - paragraph [ref=f4e21]: Kalki LLP is designed to replace 14-day vendor compliance audits with autonomous investigators that cross-examine live web policies and ground every claim in verbatim citations. Execution pauses at a Managing Partner judgment gate before signed dossiers are issued.
+        - generic [ref=f4e22]:
+          - link "Launch Command Center" [ref=f4e23] [cursor=pointer]:
+            - /url: /desk
+          - link "Inspect Sample Dossier" [ref=f4e27] [cursor=pointer]:
+            - /url: "#cases"
+        - generic [ref=f4e30]: EVIDENCE FIRST. HUMAN AUTHORITY, ALWAYS.
+      - generic [ref=f4e31]:
+        - generic [ref=f4e32]:
+          - generic [ref=f4e36]: LIVE CROSS-EXAMINATION
+          - generic [ref=f4e37]: DEMO
+        - generic [ref=f4e38]:
+          - generic [ref=f4e39]:
+            - generic [ref=f4e40]: CONTROL / SOC2-CC6.1
+            - generic [ref=f4e41]: CASE 002
+          - generic [ref=f4e42]:
+            - text: VENDOR CLAIM
+            - blockquote [ref=f4e43]: “Zero third-party AI training or subprocessor sharing.”
+          - generic [ref=f4e44]:
+            - text: POLICY EVIDENCE
+            - code [ref=f4e45]: olostep://vendor.io/privacy
+            - blockquote [ref=f4e46]: “We may share customer content with third-party AI providers for model training and service improvement.”
+            - generic [ref=f4e47]:
+              - generic [ref=f4e48]: CRITICAL CONTRADICTION
+              - generic [ref=f4e49]: 98.4% CONFIDENCE*
+        - generic [ref=f4e50]:
+          - generic [ref=f4e54]: "PAUSED: PARTNER GATE"
+          - generic [ref=f4e55]: HUMAN REVIEW REQUIRED
+        - paragraph [ref=f4e56]: Illustrative policy excerpt and confidence score; not scraped evidence or a measured model result.
+    - region "Target economics" [ref=f4e57]:
+      - generic [ref=f4e58]:
+        - strong [ref=f4e59]: 14 Days → 45s
+        - paragraph [ref=f4e60]: End-to-End Audit Turnaround
+      - generic [ref=f4e61]:
+        - strong [ref=f4e62]: $5,000+ → $0.08
+        - paragraph [ref=f4e63]: Unit Cost per Vendor Engagement
+      - generic [ref=f4e64]:
+        - strong [ref=f4e65]: 100% Verbatim
+        - paragraph [ref=f4e66]: Mandatory Source URL & Quote Grounding
+      - generic [ref=f4e67]:
+        - strong [ref=f4e68]: ≤ 18 Credits
+        - paragraph [ref=f4e69]: Budget-Governed Live Web Intelligence
+      - paragraph [ref=f4e70]: DESIGN TARGETS, NOT MEASURED OUTCOMES · 25-CREDIT HARD ENGAGEMENT CAP · PARTNER REVIEW TIME EXCLUDED
+    - generic [ref=f4e71]:
+      - generic [ref=f4e72]:
+        - generic [ref=f4e73]:
+          - generic [ref=f4e74]: THE AUTONOMOUS FIRM LIFECYCLE
+          - heading "Five stages. One accountable record." [level=2] [ref=f4e75]
+          - paragraph [ref=f4e76]: Explore the intended operating model, from the first claim to the final sign-off.
+        - generic [ref=f4e77]:
+          - tablist "Firm lifecycle" [ref=f4e78]:
+            - tab "01 INTAKE" [selected] [ref=f4e79] [cursor=pointer]:
+              - generic [ref=f4e80]: "01"
+              - text: INTAKE
+            - tab "02 DISCOVERY" [ref=f4e81] [cursor=pointer]:
+              - generic [ref=f4e82]: "02"
+              - text: DISCOVERY
+            - tab "03 CROSS-EXAMINATION" [ref=f4e83] [cursor=pointer]:
+              - generic [ref=f4e84]: "03"
+              - text: CROSS-EXAMINATION
+            - tab "04 PARTNER JUDGMENT GATE" [ref=f4e85] [cursor=pointer]:
+              - generic [ref=f4e86]: "04"
+              - text: PARTNER JUDGMENT GATE
+            - tab "05 DOSSIER & REDLINES" [ref=f4e87] [cursor=pointer]:
+              - generic [ref=f4e88]: "05"
+              - text: DOSSIER & REDLINES
+          - tabpanel "01 INTAKE" [ref=f4e89]:
+            - generic [ref=f4e90]:
+              - text: WORKFLOW SPECIFICATION
+              - generic [ref=f4e91]: 01 / 05
+            - heading "From questionnaire to testable claims." [level=3] [ref=f4e92]
+            - paragraph [ref=f4e93]: Parse vendor claims against DPDP Act, GDPR, and SOC 2 frameworks.
+            - generic [ref=f4e94]: "{ \"framework\": \"SOC 2\", \"control\": \"CC6.1\", \"claim\": \"No third-party AI training\", \"status\": \"AWAITING EVIDENCE\" }"
+            - text: ILLUSTRATIVE ARTIFACT · NOT A LIVE EXECUTION
+      - generic [ref=f4e95]:
+        - generic [ref=f4e96]:
+          - generic [ref=f4e97]: CASE FILES / OPEN FOR INSPECTION
+          - heading "The contradiction is in the details." [level=2] [ref=f4e98]
+          - paragraph [ref=f4e99]: Three synthetic case files. Exact sample quotations, visible reasoning, no invented live results.
+        - tablist "Sample cases" [ref=f4e100]:
+          - tab "CASE 01 Compliant SaaS Vendor" [ref=f4e101] [cursor=pointer]:
+            - generic [ref=f4e102]: CASE 01
+            - text: Compliant SaaS Vendor
+          - tab "CASE 02 Deceptive Data-Residency Claim" [selected] [ref=f4e103] [cursor=pointer]:
+            - generic [ref=f4e104]: CASE 02
+            - text: Deceptive Data-Residency Claim
+          - tab "CASE 03 Hostile Prompt-Injection Webpage" [ref=f4e105] [cursor=pointer]:
+            - generic [ref=f4e106]: CASE 03
+            - text: Hostile Prompt-Injection Webpage
+        - tabpanel "Deceptive Data-Residency Claim" [ref=f4e107]:
+          - generic [ref=f4e108]:
+            - generic [ref=f4e109]: CRITICAL · PARTNER GATE TRIGGERED
+            - generic [ref=f4e110]: GDPR-ART.44
+          - generic [ref=f4e111]:
+            - generic [ref=f4e112]:
+              - text: VENDOR CLAIM
+              - blockquote [ref=f4e113]: “All customer data remains exclusively within the European Union.”
+            - generic [ref=f4e114]:
+              - text: VERBATIM SAMPLE EVIDENCE
+              - blockquote [ref=f4e115]: “We may transfer customer data to subprocessors located in the United States for service delivery and support.”
+              - code [ref=f4e116]: example-vendor.test/privacy
+          - generic [ref=f4e117]:
+            - text: PROPOSED CONTRACT REDLINE
+            - paragraph [ref=f4e118]:
+              - deletion [ref=f4e119]: Transfers permitted at the processor’s discretion.
+            - paragraph [ref=f4e120]: The processor shall retain customer data within the EU. Any transfer outside the EU requires prior written approval and documented transfer safeguards.
+          - generic [ref=f4e121]: Execution paused · Managing Partner decision required
+      - generic [ref=f4e122]:
+        - generic [ref=f4e123]:
+          - generic [ref=f4e124]: OUR PRACTICE
+          - heading "Built around the obligations that matter." [level=2] [ref=f4e125]: Built around the obligationsthat matter.
+        - generic [ref=f4e126]:
+          - article [ref=f4e127]:
+            - generic [ref=f4e128]: "01"
+            - heading "DPDP Act Readiness (India)" [level=3] [ref=f4e129]
+            - paragraph [ref=f4e130]: Consent notices, data fiduciary obligations, and cross-border transfer disclosures.
+          - article [ref=f4e131]:
+            - generic [ref=f4e132]: "02"
+            - heading "GDPR & Subprocessor Audits" [level=3] [ref=f4e133]
+            - paragraph [ref=f4e134]: Live verification of DPA clauses, EU residency claims, and third-party data flows.
+          - article [ref=f4e135]:
+            - generic [ref=f4e136]: "03"
+            - heading "SOC 2 Vendor Due Diligence" [level=3] [ref=f4e137]
+            - paragraph [ref=f4e138]: Evidence-based review of public security pages, trust centers, and adverse breach coverage.
+          - article [ref=f4e139]:
+            - generic [ref=f4e140]: "04"
+            - heading "Automated Contract Redlining" [level=3] [ref=f4e141]
+            - paragraph [ref=f4e142]: Clause-level remediation language drafted directly from verified policy contradictions.
+      - generic [ref=f4e143]:
+        - generic [ref=f4e144]:
+          - generic [ref=f4e145]: SAFETY IS AN OPERATING PRINCIPLE
+          - heading "Why Kalki is a firm, not a wrapper." [level=2] [ref=f4e146]: Why Kalki is a firm,not a wrapper.
+          - paragraph [ref=f4e147]: Authority is deliberately bounded. Untrusted web evidence cannot change instructions, approve an engagement, or authorize a tool call. Exact substring validation is the intended release condition for every quotation—not a claim of universal zero hallucinations.
+          - paragraph [ref=f4e148]: The operating specification calls for SHA-256 hash-chained Partner audit trails and strict Olostep credit governance. Replay is the default; live engagements have a hard 25-credit ceiling. Human judgment remains the final authority.
+          - generic [ref=f4e149]: Evidence integrity before execution speed.
+        - generic [ref=f4e153]:
+          - generic [ref=f4e154]:
+            - text: EVALUATION SCORECARD
+            - generic [ref=f4e155]: TARGETS
+          - table [ref=f4e156]:
+            - rowgroup [ref=f4e157]:
+              - row [ref=f4e158]:
+                - columnheader "Benchmark dimension" [ref=f4e159]
+                - columnheader "Target" [ref=f4e160]
+            - rowgroup [ref=f4e161]:
+              - row [ref=f4e162]:
+                - cell "Verbatim Citation Fidelity" [ref=f4e163]
+                - cell "100%" [ref=f4e164]
+              - row [ref=f4e165]:
+                - cell "Contradiction Detection Recall" [ref=f4e166]
+                - cell "≥ 95%" [ref=f4e167]
+              - row [ref=f4e168]:
+                - cell "Prompt-Injection Immunity" [ref=f4e169]
+                - cell "100%*" [ref=f4e170]
+              - row [ref=f4e171]:
+                - cell "Credit Budget Compliance" [ref=f4e172]
+                - cell "100%" [ref=f4e173]
+          - paragraph [ref=f4e174]: "*Target on a defined adversarial test set, not a universal immunity guarantee. Audit-quality evaluations are not yet implemented."
+          - link "Evaluation workspace · planned" [ref=f4e175] [cursor=pointer]:
+            - /url: /desk
+      - generic [ref=f4e179]:
+        - generic [ref=f4e180]: A NEW STANDARD OF DILIGENCE
+        - heading "Stop waiting two weeks for vendor due diligence." [level=2] [ref=f4e181]: Stop waiting two weeksfor vendor due diligence.
+        - link "Launch Kalki Command Center" [ref=f4e182] [cursor=pointer]:
+          - /url: /desk
+  - contentinfo [ref=f4e186]:
+    - generic [ref=f4e187]:
+      - link "KALKI LLP" [ref=f4e188] [cursor=pointer]:
+        - /url: /
+      - paragraph [ref=f4e189]: Kalki LLP · Autonomous Due-Diligence& Compliance Practice
+      - generic [ref=f4e190]:
+        - link "Practice" [ref=f4e191] [cursor=pointer]:
+          - /url: "#practice"
+        - link "How It Works" [ref=f4e192] [cursor=pointer]:
+          - /url: "#how-it-works"
+        - link "Live Cases" [ref=f4e193] [cursor=pointer]:
+          - /url: "#cases"
+        - link "Safeguards" [ref=f4e194] [cursor=pointer]:
+          - /url: "#safeguards"
+        - link "Benchmarks" [ref=f4e195] [cursor=pointer]:
+          - /url: "#benchmarks"
+    - generic [ref=f4e196]:
+      - generic [ref=f4e197]: React / FastAPI / Olostep / Gemini
+      - generic [ref=f4e198]: GitHub · repository link forthcoming
+      - generic [ref=f4e199]: © 2026 Kalki LLP

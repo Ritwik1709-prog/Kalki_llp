@@ -1,0 +1,80 @@
+- generic [ref=f8e3]:
+  - complementary [ref=f8e4]:
+    - link "KALKI LLP" [ref=f8e5] [cursor=pointer]:
+      - /url: /
+    - generic [ref=f8e6]: PARTNER WORKSPACE
+    - link "Case library 03" [ref=f8e7] [cursor=pointer]:
+      - /url: "#case-library"
+      - text: Case library
+      - generic [ref=f8e13]: "03"
+    - button "Dossier preview" [ref=f8e14] [cursor=pointer]
+    - link "Practice safeguards" [ref=f8e18] [cursor=pointer]:
+      - /url: /#safeguards
+    - link "Firm website" [ref=f8e22] [cursor=pointer]:
+      - /url: /
+    - generic [ref=f8e25]:
+      - text: ENVIRONMENT
+      - strong [ref=f8e26]: Demonstration
+      - paragraph [ref=f8e27]: Synthetic cases. No live audit or approval actions.
+  - main [ref=f8e28]:
+    - generic [ref=f8e29]:
+      - generic [ref=f8e30]: KALKI LLP / COMMAND CENTER
+      - button "Check backend" [ref=f8e31] [cursor=pointer]
+    - status [ref=f8e37]: Connecting to backend…
+    - generic [ref=f8e38]:
+      - generic [ref=f8e39]:
+        - generic [ref=f8e40]: THE HUMAN AUTHORITY LAYER
+        - heading "Partner Judgment Desk" [level=1] [ref=f8e41]
+        - paragraph [ref=f8e42]: Inspect the evidence. Challenge the conclusion.
+      - button "Preview dossier" [ref=f8e43] [cursor=pointer]
+    - generic [ref=f8e47]:
+      - generic [ref=f8e48]:
+        - generic [ref=f8e49]: Sample engagements
+        - strong [ref=f8e50]: "03"
+        - generic [ref=f8e51]: Available for exploration
+      - generic [ref=f8e52]:
+        - generic [ref=f8e53]: Partner review scenarios
+        - strong [ref=f8e54]: "02"
+        - generic [ref=f8e55]: Contradiction or source integrity
+      - generic [ref=f8e56]:
+        - generic [ref=f8e57]: Live credits consumed
+        - strong [ref=f8e58]: "00"
+        - generic [ref=f8e59]: This demonstration makes no paid calls
+    - generic [ref=f8e60]:
+      - generic [ref=f8e61]:
+        - textbox "Search sample cases" [ref=f8e66]:
+          - /placeholder: Find a case...
+        - generic [ref=f8e67]:
+          - button "All cases" [pressed] [ref=f8e68] [cursor=pointer]
+          - button "Needs review" [ref=f8e69] [cursor=pointer]
+          - button "Verified" [ref=f8e70] [cursor=pointer]
+        - button "CASE 01 / SOC2-CC6.1 Compliant SaaS Vendor LOW" [ref=f8e71] [cursor=pointer]:
+          - generic [ref=f8e72]: CASE 01 / SOC2-CC6.1
+          - strong [ref=f8e73]: Compliant SaaS Vendor
+          - text: LOW
+        - button "CASE 02 / GDPR-ART.44 Deceptive Data-Residency Claim CRITICAL" [ref=f8e76] [cursor=pointer]:
+          - generic [ref=f8e77]: CASE 02 / GDPR-ART.44
+          - strong [ref=f8e78]: Deceptive Data-Residency Claim
+          - text: CRITICAL
+        - button "CASE 03 / EVIDENCE-INTEGRITY Hostile Prompt-Injection Webpage BLOCKED" [ref=f8e81] [cursor=pointer]:
+          - generic [ref=f8e82]: CASE 03 / EVIDENCE-INTEGRITY
+          - strong [ref=f8e83]: Hostile Prompt-Injection Webpage
+          - text: BLOCKED
+      - article [ref=f8e86]:
+        - generic [ref=f8e87]:
+          - generic [ref=f8e88]: CASE 02
+          - generic [ref=f8e89]: CRITICAL · PARTNER GATE TRIGGERED
+        - heading "Deceptive Data-Residency Claim" [level=2] [ref=f8e90]
+        - generic [ref=f8e91]:
+          - button "evidence" [pressed] [ref=f8e92] [cursor=pointer]
+          - button "redline" [ref=f8e93] [cursor=pointer]
+          - button "notes" [ref=f8e94] [cursor=pointer]
+        - generic [ref=f8e95]:
+          - text: VENDOR CLAIM
+          - blockquote [ref=f8e96]: All customer data remains exclusively within the European Union.
+          - text: VERBATIM SAMPLE POLICY
+          - blockquote [ref=f8e97]: We may transfer customer data to subprocessors located in the United States for service delivery and support.
+          - code [ref=f8e98]: example-vendor.test/privacy
+        - generic [ref=f8e99]: Execution paused · Managing Partner decision required
+    - paragraph [ref=f8e104]: Final Partner approval and signed dossier release remain unavailable. This workspace is an interactive preview.
+    - status

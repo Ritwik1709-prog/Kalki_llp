@@ -1,10 +1,10 @@
-# Attest LLP — Track A2: The full-stack AI firm
+# Kalki LLP — Track A2: The full-stack AI firm
 
 ## Stack and scope
 - Backend: Python, FastAPI, SQLite, and Pydantic v2. Validate API and LLM outputs with strict schemas.
 - Frontend: React, Vite, TypeScript, and Tailwind CSS with a dark-mode interface.
 - Web evidence: Olostep API, accessed exclusively through `OlostepGateway`.
-- LLM: Gemini (`gemini-3.8-flash`), configured through environment variables. Astra assists development; pytest verifies behavior.
+- LLM: Gemini (`gemini-3.6-flash`), configured through environment variables. Astra assists development; pytest verifies behavior.
 - Build one vendor due-diligence workflow: claims → evidence → cross-examination → Managing Partner review → signed dossier.
 
 ## Non-negotiable Olostep credit protection
@@ -34,3 +34,14 @@
 - Keep credentials in the environment; never print keys, authorization headers, raw API error bodies, or secret-bearing exception messages.
 - Do not modify `.env` or `.gitignore` without an explicit user request. Do not commit caches or private evidence.
 - Favor the first-weekend vertical slice over infrastructure expansion. Test credit limits, replay isolation, citation integrity, and the Partner gate without paid calls.
+
+## Permanent Deployment Invariants
+- Preserve dual DB compatibility: local SQLite through aiosqlite, production PostgreSQL through asyncpg. Use portable SQLAlchemy types. Never use sqlite3 in production services.
+- Render disk is ephemeral. Persist olostep_cache, credit_ledger, engagements, findings, approval_gates, and audit_logs in PostgreSQL. Only read-only fixtures/olostep_cassettes/ may hold application data on production disk. The standalone smoke script is local-only and is not the production gateway.
+- Never put secrets in VITE_ variables or call Olostep/Gemini from frontend/. Only VITE_API_URL is public. All REST and EventSource calls use src/lib/api.ts.
+- Never use weasyprint or system-library PDF packages. Use reportlab, io.BytesIO, and StreamingResponse. Require authenticated, exact-version Partner approval before exposing dossier download routes.
+- Apply numbered, idempotent migrations during FastAPI lifespan. create_all does not alter existing tables: append a migration for every schema change and preserve existing data.
+- All SSE endpoints must use app.streaming.sse_response: no-cache, keep-alive, X-Accel-Buffering: no, and comment heartbeats every 15 seconds. Heartbeats reduce idle timeouts but cannot guarantee proxy uptime; clients must reconnect safely.
+- Cloud PostgreSQL URLs strip sslmode/channel_binding and use connect_args ssl=True. Use pool_pre_ping, 300-second recycle, pool_size=5, max_overflow=5. Keep one worker; deployment overlap and other clients also consume the provider connection allowance.
+- Production must reject SQLite. CORS uses ALLOWED_ORIGINS; preview regex is opt-in and admits all matching Vercel tenants, not just this project.
+- Run pytest and scripts/verify_deploy_ready.py before shipping. No paid API calls in deployment validation.
