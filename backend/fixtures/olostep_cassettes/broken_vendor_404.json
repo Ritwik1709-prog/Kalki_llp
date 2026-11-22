@@ -1,0 +1,108 @@
+{
+  "preset": {
+    "id": "broken_vendor_404",
+    "vendor_name": "Broken Vendor",
+    "target_url": "https://broken-vendor-404.test",
+    "framework": "DPDP",
+    "description": "Synthetic partial evidence: security times out and subprocessors returns 404; missing controls remain UNVERIFIED.",
+    "questionnaire": [
+      {
+        "control_id": "SOC2-CC6.1",
+        "text": "All customer data is encrypted at rest.",
+        "source_url": "https://broken-vendor-404.test/questionnaire"
+      },
+      {
+        "control_id": "DPDP-TRANSFER",
+        "text": "All processing locations and subprocessors are disclosed.",
+        "source_url": "https://broken-vendor-404.test/questionnaire"
+      }
+    ],
+    "expected_risk": "MEDIUM",
+    "expected_status": "INVESTIGATING",
+    "synthetic": true,
+    "requires_final_partner_approval": true
+  },
+  "cassettes": [
+    {
+      "endpoint": "/v1/maps",
+      "parameters": {
+        "url": "https://broken-vendor-404.test",
+        "top_n": 50
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "urls": [
+          "https://broken-vendor-404.test/security",
+          "https://broken-vendor-404.test/subprocessors",
+          "https://broken-vendor-404.test/privacy"
+        ]
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://broken-vendor-404.test/security",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "timeout"
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://broken-vendor-404.test/subprocessors",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "not_found"
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://broken-vendor-404.test/privacy",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# Broken Vendor privacy\nWe process account contact details to provide support. Security controls and transfer locations are not described in this policy."
+      }
+    },
+    {
+      "endpoint": "/v1/searches",
+      "parameters": {
+        "query": "Broken Vendor security breach regulatory action",
+        "limit": 3,
+        "type": "any"
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "links": []
+      }
+    }
+  ]
+}

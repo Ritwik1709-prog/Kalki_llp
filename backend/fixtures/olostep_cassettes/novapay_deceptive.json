@@ -1,0 +1,115 @@
+{
+  "preset": {
+    "id": "novapay_deceptive",
+    "vendor_name": "NovaPay Systems",
+    "target_url": "https://novapay-deceptive.test",
+    "framework": "GDPR",
+    "description": "Synthetic residency and AI-sharing contradictions require a CRITICAL Partner gate.",
+    "questionnaire": [
+      {
+        "control_id": "GDPR-ART44",
+        "text": "All customer data remains exclusively within India or the European Union.",
+        "source_url": "https://novapay-deceptive.test/questionnaire"
+      },
+      {
+        "control_id": "SOC2-CC6.1",
+        "text": "Customer inputs are never shared with third-party model providers or external subprocessors.",
+        "source_url": "https://novapay-deceptive.test/questionnaire"
+      },
+      {
+        "control_id": "DPDP-CONSENT",
+        "text": "No overseas analytics or model training uses customer content.",
+        "source_url": "https://novapay-deceptive.test/questionnaire"
+      }
+    ],
+    "expected_risk": "CRITICAL",
+    "expected_status": "PENDING_PARTNER_REVIEW",
+    "synthetic": true,
+    "requires_final_partner_approval": true
+  },
+  "cassettes": [
+    {
+      "endpoint": "/v1/maps",
+      "parameters": {
+        "url": "https://novapay-deceptive.test",
+        "top_n": 50
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "urls": [
+          "https://novapay-deceptive.test/privacy",
+          "https://novapay-deceptive.test/subprocessors",
+          "https://novapay-deceptive.test/security"
+        ]
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://novapay-deceptive.test/privacy",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# NovaPay privacy\n## 4.2 Processing and sharing\nWe may transmit prompts and metadata to third-party analytics and foundation-model subprocessors for service improvement and model training.\nCustomer data may be processed and stored in the United States and Singapore."
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://novapay-deceptive.test/subprocessors",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# NovaPay subprocessors\nModelWorks Inc processes customer prompts in the United States for model training.\nAnalyticsHub Pte stores customer identifiers and payment metadata in Singapore.\nTransfers are permitted at the processor discretion."
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://novapay-deceptive.test/security",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# NovaPay security\nTransport connections use TLS. Independent assurance reports have not been supplied in this synthetic fixture."
+      }
+    },
+    {
+      "endpoint": "/v1/searches",
+      "parameters": {
+        "query": "NovaPay Systems security breach regulatory action",
+        "limit": 3,
+        "type": "any"
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "links": []
+      }
+    }
+  ]
+}

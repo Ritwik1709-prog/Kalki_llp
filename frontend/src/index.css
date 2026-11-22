@@ -35,3 +35,41 @@ button.text-link{background:none;border:0;padding:0;font-family:inherit}
 @media(max-width:1100px){.engagement-launchers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.sample-drawer{padding:22px 18px}.trace-card{height:610px}.execution-trace{padding:0 18px}.trace-toolbar{padding:18px}.engagement-launchers{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Phase 2: retain the page rhythm and tokens, refine only the hero and band. */
+.editorial-hero{grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding-top:64px;padding-bottom:64px}
+.editorial-hero>.hero-copy{grid-column:span 7;min-width:0}
+.editorial-hero>.institutional-terminal{grid-column:span 5}
+.editorial-hero .framed-eyebrow{display:inline-block;border:1px solid var(--border);padding:8px 11px;font-size:9px;letter-spacing:.09em}
+.editorial-hero h1{font-size:clamp(2.75rem,5.5vw,4.75rem);line-height:1.04}
+.editorial-hero .hero-copy>p{max-width:540px}
+.institutional-terminal{height:780px;max-width:none;transform:none;animation:none}
+.terminal-chrome{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:18px;border-bottom:1px solid var(--border);font:9px/1.7 'JetBrains Mono',monospace}
+.terminal-chrome>span:first-child{flex-basis:100%;color:#b9b9c5}
+.terminal-chrome .text-link{font-size:10px}
+.credit-badge{padding:4px 7px;border:1px solid var(--border);border-radius:3px;color:#b9b9c5}
+.terminal-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+.institutional-terminal .trace-toolbar{padding:16px 18px;gap:8px}
+.institutional-terminal .trace-toolbar .micro{font-size:9px}
+.institutional-terminal .execution-trace{height:288px;padding:0 18px;flex:none}
+.institutional-terminal .trace-step{font-size:10px}
+.terminal-comparison{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:4px 18px 18px}
+.terminal-comparison section{padding:16px 12px;min-width:0}
+.terminal-comparison section+section{border-left:1px solid var(--border);background:#dc262608}
+.terminal-comparison h2{font:9px/1.8 'JetBrains Mono',monospace;letter-spacing:0;margin:0;color:var(--muted);text-transform:uppercase}
+.terminal-comparison h2 span{display:block}
+.terminal-comparison blockquote{font-size:12px;line-height:1.75;margin:12px 0 0;overflow-wrap:anywhere}
+.terminal-comparison mark{background:#dc262615;color:#f2a0a0;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.institutional-terminal .trace-footer{display:flex;flex-wrap:wrap;gap:5px 14px;padding:12px 18px;flex-shrink:0;font-size:9px}
+.institutional-terminal .trace-footer>span:last-child{flex-basis:100%}
+.institutional-terminal .demo-note{padding:10px 18px;flex-shrink:0;font-size:9px}
+.institutional-economics{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.economics-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.economics-grid>div{padding:28px 20px;border-right:1px solid var(--border)}
+.economics-grid>div:first-child{padding-left:0}.economics-grid>div:last-child{border-right:0}
+.economics-grid strong{font:500 clamp(16px,1.65vw,23px)/1.6 'JetBrains Mono',monospace;letter-spacing:-.05em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.economics-grid p{font-size:11px;line-height:1.8;margin:8px 0 0;max-width:230px}
+.economics-disclaimer{border-top:1px solid var(--border);margin:0;padding:16px 0;font-size:8px;letter-spacing:.02em}
+@media(max-width:1000px){.editorial-hero{grid-template-columns:1fr;gap:40px}.editorial-hero>.hero-copy,.editorial-hero>.institutional-terminal{grid-column:1}.editorial-hero .hero-copy>p{max-width:650px}.institutional-terminal{width:100%;height:710px}.economics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.economics-grid>div{padding:24px 20px!important}.economics-grid>div:nth-child(2){border-right:0}.economics-grid>div:nth-child(-n+2){border-bottom:1px solid var(--border)}.economics-grid strong{font-size:22px}}
+@media(max-width:480px){.editorial-hero{padding-top:44px;padding-bottom:44px}.editorial-hero .framed-eyebrow{font-size:8px}.institutional-terminal{height:940px}.institutional-terminal .execution-trace{height:320px}.terminal-comparison{grid-template-columns:1fr}.terminal-comparison section+section{border-left:0;border-top:1px solid var(--border)}.terminal-comparison section{padding:14px 12px}.economics-grid{grid-template-columns:1fr}.economics-grid>div{border-right:0;border-bottom:1px solid var(--border);padding:24px 0!important}.economics-grid>div:last-child{border-bottom:0}.economics-grid p{max-width:none}}
+@media(max-width:360px){.closing .button{max-width:100%;white-space:normal}}

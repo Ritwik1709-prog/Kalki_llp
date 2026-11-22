@@ -35,25 +35,26 @@ async def test_migration_and_persistence(tmp_path):
         assert set(metadata.tables) <= set(names)
         await conn.execute(text("INSERT INTO engagements (id,status,version) VALUES ('e','PENDING_PARTNER_REVIEW',1)"))
         await conn.execute(metadata.tables['olostep_cache'].insert().values(
-            key='a'*64, retrieved_at='2026-11-21T00:00:00Z', source_url='https://example.com', response={'text':'evidence'}))
-        await conn.execute(metadata.tables['credit_ledger'].insert().values(engagement_id='e', credits=25))
+            cache_key_sha256='a'*64, retrieved_at='2026-11-21T00:00:00Z', source_url='https://example.com', response={'text':'evidence'}))
+        await conn.execute(metadata.tables['credit_ledger'].insert().values(engagement_id='e', endpoint='/v1/maps', credits_consumed=25, cache_hit=False, mode='live'))
+        await conn.execute(text("UPDATE engagements SET credits_used=25 WHERE id='e'"))
     await engine.dispose()
     engine = build_engine(settings)
     await migrate(engine)
     async with engine.connect() as conn:
         assert (await conn.execute(text("SELECT status FROM engagements WHERE id='e'"))).scalar() == "PENDING_PARTNER_REVIEW"
         assert (await conn.execute(metadata.tables['olostep_cache'].select())).mappings().one()['response'] == {'text':'evidence'}
-        assert (await conn.execute(text("SELECT credits FROM credit_ledger"))).scalar() == 25
+        assert (await conn.execute(text("SELECT credits_consumed FROM credit_ledger"))).scalar() == 25
     with pytest.raises(IntegrityError):
         async with engine.begin() as conn:
-            await conn.execute(text("UPDATE credit_ledger SET credits=26"))
+            await conn.execute(text("UPDATE engagements SET credits_used=26"))
     await engine.dispose()
 
 def test_health_cors_and_production_guard():
     settings = Settings(database_url="sqlite+aiosqlite:///:memory:", render=False, app_env="test")
     with TestClient(create_app(settings)) as client:
         response = client.get('/health', headers={'Origin':'http://localhost:5173'})
-        assert response.json() == {"status":"ok", "db":"connected", "olostep_mode":"replay"}
+        assert response.json() == {"status":"ok", "db":"connected", "olostep_mode":"replay", "budget_total":5000, "budget_remaining":5000, "budget_source":"local_ledger_not_provider_balance"}
         assert response.headers['access-control-allow-origin'] == 'http://localhost:5173'
         assert 'access-control-allow-origin' not in client.get('/health', headers={'Origin':'https://evil.example'}).headers
         with patch.object(type(client.app.state.engine), 'connect', side_effect=RuntimeError('secret')):

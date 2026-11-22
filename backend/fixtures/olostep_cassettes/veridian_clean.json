@@ -1,0 +1,115 @@
+{
+  "preset": {
+    "id": "veridian_clean",
+    "vendor_name": "Veridian Cloud",
+    "target_url": "https://veridian-clean.test",
+    "framework": "SOC2",
+    "description": "Synthetic consistent public controls. LOW-risk controls may clear automatically; final release still requires a human Partner.",
+    "questionnaire": [
+      {
+        "control_id": "SOC2-CC6.1",
+        "text": "Customer data is encrypted at rest using AES-256.",
+        "source_url": "https://veridian-clean.test/questionnaire"
+      },
+      {
+        "control_id": "SOC2-CC6.3",
+        "text": "Administrative access requires multi-factor authentication.",
+        "source_url": "https://veridian-clean.test/questionnaire"
+      },
+      {
+        "control_id": "DPDP-CONSENT",
+        "text": "Customer prompts are not used for model training.",
+        "source_url": "https://veridian-clean.test/questionnaire"
+      }
+    ],
+    "expected_risk": "LOW",
+    "expected_status": "INVESTIGATING",
+    "synthetic": true,
+    "requires_final_partner_approval": true
+  },
+  "cassettes": [
+    {
+      "endpoint": "/v1/maps",
+      "parameters": {
+        "url": "https://veridian-clean.test",
+        "top_n": 50
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "urls": [
+          "https://veridian-clean.test/security",
+          "https://veridian-clean.test/privacy",
+          "https://veridian-clean.test/subprocessors"
+        ]
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://veridian-clean.test/security",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# Veridian security\nAll customer data stored in production databases is encrypted at rest using AES-256.\nAdministrative access requires multi-factor authentication. Access is reviewed quarterly.\nThis synthetic public policy is not a SOC 2 certification report."
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://veridian-clean.test/privacy",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# Veridian privacy\nCustomer prompts are not used for model training. Personal data is processed only for contracted service delivery. Deletion requests are completed within 30 days."
+      }
+    },
+    {
+      "endpoint": "/v1/scrapes",
+      "parameters": {
+        "url_to_scrape": "https://veridian-clean.test/subprocessors",
+        "formats": [
+          "markdown"
+        ],
+        "max_age": 604800,
+        "storage": {
+          "expires_in": "30d"
+        }
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "markdown_content": "# Veridian subprocessors\nStorageCo EU provides encrypted hosting in Frankfurt. Changes require advance notice and customer objection rights."
+      }
+    },
+    {
+      "endpoint": "/v1/searches",
+      "parameters": {
+        "query": "Veridian Cloud security breach regulatory action",
+        "limit": 3,
+        "type": "any"
+      },
+      "retrieved_at": "2026-11-22T00:00:00+00:00",
+      "response": {
+        "status": "ok",
+        "links": []
+      }
+    }
+  ]
+}
