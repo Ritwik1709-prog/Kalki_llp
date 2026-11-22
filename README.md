@@ -16,7 +16,7 @@ Track A2: **The full-stack AI firm**.
 
 | Tool / library | Role |
 | --- | --- |
-| Astra | AI development assistant for implementation and review |
+| ChatGPT | AI development assistant for implementation and review |
 | Gemini `gemini-3.8-flash` | Our LLM model for claim extraction, cross-examination, and dossier drafting |
 | Olostep API | Discover and retrieve web evidence through `OlostepGateway` |
 | FastAPI + Pydantic v2 | Backend API and validated data contracts |
