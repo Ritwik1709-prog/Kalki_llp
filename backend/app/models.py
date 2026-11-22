@@ -37,9 +37,11 @@ engagements = Table("engagements", metadata,
     Column("framework", enum_type(Framework), CheckConstraint("framework IN ('DPDP','GDPR','SOC2')")),
     Column("questionnaire_json", JSON), Column("risk_score", Integer, CheckConstraint("risk_score BETWEEN 0 AND 100")),
     Column("credits_used", Integer, CheckConstraint("credits_used BETWEEN 0 AND 25"), nullable=False, server_default="0"),
-    Column("duration_ms", Integer), timestamp(), timestamp("updated_at"))
+    Column("duration_ms", Integer), Column("event_seq", Integer, nullable=False, server_default="0"),
+    Column("audit_head", String(64)), timestamp(), timestamp("updated_at"))
 
 agent_steps = Table("agent_steps", metadata, id_column(), engagement_fk(),
+    Column("sequence", Integer, nullable=False, server_default="0"),
     Column("stage", String, nullable=False), Column("event_type", String, nullable=False),
     Column("message", Text, nullable=False), Column("payload_json", JSON),
     Column("credits_delta", Integer, nullable=False, server_default="0"), Column("latency_ms", Integer), timestamp())

@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     app_env: str = "development"
     llm_model: str = "gemini-3.8-flash"
     llm_fast_model: str = "gemini-3.5-flash-lite"
+    llm_mode: Literal["auto", "mock", "live"] = "auto"
 
     @property
     def origins(self):

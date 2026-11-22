@@ -56,6 +56,10 @@ async def migrate(engine):
             from .migrations import phase_one
             await phase_one(conn)
             await conn.execute(text("INSERT INTO schema_migrations (version) VALUES (3)"))
+        if 4 not in versions:
+            from .migrations import phase_two
+            await phase_two(conn)
+            await conn.execute(text("INSERT INTO schema_migrations (version) VALUES (4)"))
 
 
 def session_factory(engine):

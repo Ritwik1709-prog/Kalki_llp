@@ -4,6 +4,24 @@ from sqlalchemy.schema import CreateColumn
 from .models import metadata
 
 
+async def phase_two(conn):
+    for table_name, name, ddl in [
+        ("engagements", "event_seq", "INTEGER NOT NULL DEFAULT 0"),
+        ("engagements", "audit_head", "VARCHAR(64)"),
+        ("agent_steps", "sequence", "INTEGER NOT NULL DEFAULT 0"),
+    ]:
+        existing = await conn.run_sync(lambda c: {x["name"] for x in inspect(c).get_columns(table_name)})
+        if name not in existing:
+            await conn.execute(text(f'ALTER TABLE {table_name} ADD COLUMN {name} {ddl}'))
+    await conn.execute(text("""WITH numbered AS (
+        SELECT id, ROW_NUMBER() OVER (PARTITION BY engagement_id ORDER BY created_at,id) AS n
+        FROM agent_steps) UPDATE agent_steps SET sequence=(SELECT n FROM numbered WHERE numbered.id=agent_steps.id)"""))
+    await conn.execute(text("UPDATE engagements SET event_seq=COALESCE((SELECT MAX(sequence) FROM agent_steps WHERE engagement_id=engagements.id),0)"))
+    await conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS ix_step_sequence ON agent_steps (engagement_id,sequence)"))
+    if conn.dialect.name == "postgresql":
+        await conn.execute(text("ALTER TABLE engagements ALTER COLUMN status TYPE VARCHAR(32)"))
+
+
 async def phase_one(conn):
     def columns(sync, table):
         return {column["name"] for column in inspect(sync).get_columns(table)}

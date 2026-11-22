@@ -228,7 +228,7 @@ async def test_atomic_migration_concurrent_startup(tmp_path):
     try:
         await asyncio.gather(*(migrate(engine) for engine in engines))
         async with engines[0].connect() as conn:
-            assert (await conn.execute(text("SELECT version FROM schema_migrations ORDER BY version"))).scalars().all() == [1,2,3]
+            assert (await conn.execute(text("SELECT version FROM schema_migrations ORDER BY version"))).scalars().all() == [1,2,3,4]
     finally:
         for engine in engines:
             await engine.dispose()

@@ -1,4 +1,4 @@
-# Kalki LLP backend — Phase 1
+# Kalki LLP backend — Phases 1 and 2
 
 Python 3.12, FastAPI, Pydantic v2, async SQLAlchemy and httpx. From the repository root:
 
@@ -53,4 +53,31 @@ Their declared synthetic retrieval time is **2026-11-22 00:00 UTC**. They intent
 - `phantomgrid_injection`: preserves hostile hidden instructions; the prompt encoder escapes embedded delimiters.
 - `broken_vendor_404`: security timeout, subprocessor 404, available privacy page; unresolved evidence remains unresolved.
 
-This phase provides schemas and ingestion, not the investigation/LLM runner, authenticated approval workflow, or signed dossier release. Expected fixture outcomes do not themselves approve an engagement. No signing or download route is exposed. LLM model names are configurable defaults, not a claim that availability was tested live. Tests use mock transport and forbid real HTTP dispatch.
+## Autonomous engine and Gemini
+
+`LLM_MODE=auto` is the default: a present `LLM_API_KEY` selects Gemini; no key selects the deterministic mock analyzer. `LLM_MODE=mock` forces offline analysis, including in CI. Live request failures are reported as incomplete investigations, never silently converted into successful mock results. The mock analyzer is intentionally narrow; unfamiliar assertions stay unresolved. Model names are configurable defaults, not a claim that their availability was tested live.
+
+The `google-genai` async client uses the fast model for URL ranking and the main model for cross-examination and redlines. Pydantic validates JSON strictly; a schema failure allows exactly one new generation. SDK transport retries are disabled and requests have bounded timeouts. Trusted system instructions are separate from escaped untrusted claims, evidence and metadata. Models have no tools or review authority.
+
+The five agents run INTAKE → DISCOVERY → EVIDENCE_COLLECTION → CROSS_EXAMINATION → REDLINE_DRAFTING. Discovery selects only supplied same-host compliance URLs, at most five; scraping uses a semaphore of three and one adverse-media search. Search snippets are uncorroborated leads, never findings. Suspicious pages are preserved and quarantined before model use. Injection alerts have application-assigned CRITICAL severity.
+
+The citation gate matches case/whitespace-normalized text, then stores the **exact original substring**, source URL, evidence ID, retrieval timestamp and content/cache hashes. Contradictions additionally cite the original questionnaire claim/version. Missing or invalid quotations become unresolved entries, not accepted findings. Redline originals must also match the cited source.
+
+Risk weights are LOW=0, MEDIUM=30, HIGH=65, CRITICAL=90. The maximum weight plus five per additional non-LOW finding is capped at 100; unresolved gaps impose a floor of 30. Any HIGH/CRITICAL finding or redline creates a PENDING gate and ends in `AWAITING_PARTNER_REVIEW`. Incomplete investigations end in `FAILED_GRACEFULLY`. Only wholly verified LOW-risk results end in `DELIVERED`.
+
+**DELIVERED means unsigned analysis available, not a signed dossier or approval.** Every result explicitly retains `signed=false` and `release_authorized=false`. Authenticated Partner decisions and signed downloads remain outside this phase; no unguarded release route exists.
+
+## Execution and reconnection
+
+- `POST /api/engagements` accepts `{"preset_id":"veridian_clean"}` or custom `vendor_name`, `target_url`, `framework`, and `questionnaire` (1–30 atomic `{control_id,text,source_url}` claims). It returns HTTP 202 with an ID and stream URL. Framework names normalize to uppercase.
+- `GET /api/engagements?limit=20&offset=0` returns the queue and status counts.
+- `GET /api/engagements/{id}` returns the engagement, steps, original evidence, cited findings, approval gate and audit log.
+- `GET /api/engagements/{id}/stream` replays ordered persisted events, then follows new ones. SSE event `agent_step` has a monotonically increasing per-engagement `id`. Reconnect with `Last-Event-ID`; omit it to restore the complete trace. Clients should close their EventSource on a terminal event.
+
+`mode_override` is accepted only when the server has `OLOSTEP_MODE=live`; synthetic presets always use replay. No request can change the 25-credit cap. For a completely offline preset run use both `OLOSTEP_MODE=replay` and `LLM_MODE=mock`.
+
+Migration 004 adds durable sequence counters and a unique event order. Event persistence, state transitions, findings/gates and hash-chained audit entries share transactions. Queue notifications are bounded hints; the database is authoritative and periodically reconciled. All streams use the common SSE helper with 15-second comment heartbeats and no-cache/keep-alive/proxy-buffering headers.
+
+Background tasks are retained and cancelled cleanly on shutdown. Atomic run claiming prevents duplicate execution. Startup marks interrupted investigations incomplete (or paused when HIGH/CRITICAL findings already exist), rather than replaying potentially paid requests. This is a single-worker service, not a durable distributed job scheduler. Restarts restore the trace, not in-flight execution.
+
+Tests use mocked transports and a controlled fixture clock, forbid real HTTP dispatch, and exercise all four presets through execution and reconnecting SSE. No live Gemini or Olostep validation is part of the test suite.

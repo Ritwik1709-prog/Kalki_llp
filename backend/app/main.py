@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -8,6 +9,9 @@ from .db import build_engine, migrate
 from .models import engagements, findings, credit_ledger
 from .presets import load_fixtures, seed_replay_cache
 from .schemas import Health, Preset, FirmMetrics
+from .services.event_bus import EventBus
+from .agents.orchestrator import Orchestrator
+from .routers.engagements import router as engagements_router
 
 
 def create_app(settings=None):
@@ -17,18 +21,29 @@ def create_app(settings=None):
     async def lifespan(app):
         engine = build_engine(settings)
         app.state.engine = engine
+        app.state.settings = settings
+        app.state.tasks = set()
+        app.state.event_bus = EventBus(engine)
+        app.state.orchestrator = Orchestrator(engine,settings,app.state.event_bus)
         try:
             await migrate(engine)
             if settings.olostep_mode == "replay":
                 await seed_replay_cache(engine)
+            await app.state.orchestrator.recover()
             yield
         finally:
+            tasks = tuple(app.state.tasks)
+            for task in tasks:
+                task.cancel()
+            await asyncio.gather(*tasks,return_exceptions=True)
+            await app.state.orchestrator.llm.close()
             await engine.dispose()
 
     app = FastAPI(title="Kalki LLP API", lifespan=lifespan)
     app.add_middleware(CORSMiddleware, allow_origins=settings.origins,
         allow_origin_regex=settings.allowed_origin_regex, allow_methods=["GET", "POST"],
-        allow_headers=["Content-Type", "Authorization"], allow_credentials=False)
+        allow_headers=["Content-Type", "Authorization", "Last-Event-ID"], allow_credentials=False)
+    app.include_router(engagements_router)
 
     async def credits_reserved(conn):
         return int((await conn.execute(select(func.coalesce(func.sum(credit_ledger.c.credits_consumed), 0)))).scalar_one())
@@ -52,7 +67,7 @@ def create_app(settings=None):
         async with app.state.engine.connect() as conn:
             total = (await conn.execute(select(func.count()).select_from(engagements))).scalar_one()
             pending = (await conn.execute(select(func.count()).select_from(engagements).where(
-                engagements.c.status == "PENDING_PARTNER_REVIEW"))).scalar_one()
+                engagements.c.status.in_(["PENDING_PARTNER_REVIEW","AWAITING_PARTNER_REVIEW"])))).scalar_one()
             count = (await conn.execute(select(func.count()).select_from(findings))).scalar_one()
             spent = await credits_reserved(conn)
         return FirmMetrics(engagements=total, pending_partner_review=pending, findings=count,
