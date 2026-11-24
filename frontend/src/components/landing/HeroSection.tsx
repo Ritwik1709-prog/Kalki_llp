@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import HeroCrossExamCard from "./HeroCrossExamCard";
+import EvidenceField from "./EvidenceField";
 
 export default function HeroSection({ onInspectDossier }: { onInspectDossier?: () => void }) {
   function inspect() {
@@ -10,6 +11,7 @@ export default function HeroSection({ onInspectDossier }: { onInspectDossier?: (
     onInspectDossier?.();
   }
   return <section className="hero editorial-hero wrap" aria-labelledby="hero-title">
+    <EvidenceField/>
     <div className="hero-copy">
       <span className="eyebrow framed-eyebrow">TRACK A2 • AUTONOMOUS COMPLIANCE PRACTICE</span>
       <h1 id="hero-title">Autonomous<br/>due diligence.<br/><em>Partner-grade<br/>judgment.</em></h1>

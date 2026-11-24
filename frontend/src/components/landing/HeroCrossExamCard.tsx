@@ -13,7 +13,8 @@ export default function HeroCrossExamCard() {
   const [visible, setVisible] = useState(0);
   useEffect(() => {
     // Timings are deterministic; CSS removes visual motion when requested.
-    const timers = trace.map((step, index) => window.setTimeout(() => setVisible(index + 1), step.at));
+    window.dispatchEvent(new CustomEvent("kalki-trace", { detail: 0 }));
+    const timers = trace.map((step, index) => window.setTimeout(() => { setVisible(index + 1); window.dispatchEvent(new CustomEvent("kalki-trace", { detail: index + 1 })); }, step.at));
     return () => timers.forEach(window.clearTimeout);
   }, [run]);
   return <article className="hero-evidence trace-card institutional-terminal" aria-label="Live cross-examination demonstration">
